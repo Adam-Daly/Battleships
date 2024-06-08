@@ -16,5 +16,12 @@ for i in range(BOARD_SIZE + 1):
             else: 
                 board[i][j] = str(BOARD_SIZE + 1 - i)
 
-for row in board:
-    print(" ".join(row))
+# Entry point for the program
+def main():
+    for row in board:
+        print(" ".join(row))
+
+
+# If the script is run directly, call main
+if __name__ == "__main__":
+    main()
