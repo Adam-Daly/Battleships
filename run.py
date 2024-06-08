@@ -28,7 +28,10 @@ for i in range(BOARD_SIZE + 1):
         elif i == 0 and j > 0:
             board[i][j] = chr(j + 64)
         elif j == 0:
-            board[i][j] = str(BOARD_SIZE + 1 - i)
+            if (BOARD_SIZE + 1 - i) <= 9:
+               board[i][j] = " " + str(BOARD_SIZE + 1 - i)
+            else: 
+                board[i][j] = str(BOARD_SIZE + 1 - i)
 
 for row in board:
     print(" ".join(row))
