@@ -19,7 +19,7 @@ for i in range(BOARD_SIZE + 1):
 class Board:
     def __init__(self, size=10):
         self.size = size
-        self.board = [[" -" for _ in range(BOARD_SIZE + 1)] for _ in range(BOARD_SIZE + 1)]
+        self.board = [[" -" for _ in range(self.size + 1)] for _ in range(self.size + 1)]
         self._initialize_board()
     
     def _initialize_board(self):
