@@ -23,7 +23,7 @@ board = [["-" for _ in range(BOARD_SIZE + 1)] for _ in range(BOARD_SIZE + 1)]
 
 for i in range(BOARD_SIZE + 1):
     for j in range (BOARD_SIZE + 1):
-        if i and j == 0:
+        if i == 0 and j == 0:
             board[i][j] = "BS"
         elif i == 0 and j > 0:
             board[i][j] = chr(i + 64)
