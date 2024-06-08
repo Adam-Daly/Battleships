@@ -26,7 +26,7 @@ for i in range(BOARD_SIZE + 1):
         if i == 0 and j == 0:
             board[i][j] = "BS"
         elif i == 0 and j > 0:
-            board[i][j] = chr(i + 64)
+            board[i][j] = chr(j + 64)
         elif j == 0:
             board[i][j] = str(BOARD_SIZE - 1 - i)
 
