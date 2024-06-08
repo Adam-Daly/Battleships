@@ -31,4 +31,4 @@ for i in range(BOARD_SIZE + 1):
             board[i][j] = str(BOARD_SIZE + 1 - i)
 
 for row in board:
-    print(row)
+    print(" ".join(row))
