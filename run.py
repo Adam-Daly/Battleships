@@ -65,13 +65,33 @@ class Board:
 
 # Entry point for the program
 def main():
-    player_board = Board()
-    player_board.print()
 
-    if player_board.place_ship(2, 2, 5, "H") == False:
-        print("Cannot place ship!")
-    else:
-        player_board.print()
+    print("Welcome to Battleships!")
+    while True:
+        player_name = input("Please enter a name: \n")
+        print(f"You entered {player_name}, is this correct? y / n")
+        confirm_name = input()
+        if confirm_name.lower() == "y":
+            break
+
+    print()
+    print(f"Greetings {player_name}!")
+    print("1. Play against the computer")
+    print("2. See the rules of battleships")
+    print("3. Exit game")
+
+    while True:
+        choice = input("Please choose an option \n")
+        if choice.isdigit():
+            choice = int(choice)
+            if choice == 1:
+                print("You chose to play against the computer!")
+            elif choice == 2:
+                print("You chose to see the rules!")
+            elif choice == 3:
+                print("You chose to exit game!")
+        else:
+            print("Please enter a valid option!")
 
 # If the script is run directly, call main
 if __name__ == "__main__":
