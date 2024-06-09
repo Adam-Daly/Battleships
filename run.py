@@ -1,3 +1,5 @@
+import os
+
 # Game board class to be used by the player and computer
 # The size parameter allows the board size to be specificed when creating a new board
 class Board:
@@ -73,7 +75,8 @@ def main():
         confirm_name = input()
         if confirm_name.lower() == "y":
             break
-
+         
+    os.system("cls")         
     print()
     print(f"Greetings {player_name}!")
     print("1. Play against the computer")
