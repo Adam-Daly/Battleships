@@ -113,7 +113,7 @@ def main():
     while True:
         clear_console()         
         print()
-        print(f"Greetings {player_name}!")
+        print(f"Welcome to Battleships, {player_name}!")
         print("1. Play against the computer")
         print("2. See the rules of battleships")
         choice = input("Please choose an option \n")
