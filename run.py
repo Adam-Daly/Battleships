@@ -103,15 +103,14 @@ def main():
         confirm_name = input()
         if confirm_name.lower() == "y":
             break
-        
-    os.system("cls")         
-    print()
-    print(f"Greetings {player_name}!")
-    print("1. Play against the computer")
-    print("2. See the rules of battleships")
-    print("3. Exit game")
 
     while True:
+        os.system("cls")         
+        print()
+        print(f"Greetings {player_name}!")
+        print("1. Play against the computer")
+        print("2. See the rules of battleships")
+        print("3. Exit game")
         choice = input("Please choose an option \n")
         if choice.isdigit():
             choice = int(choice)
