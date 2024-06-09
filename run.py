@@ -69,7 +69,6 @@ class Board:
 def show_rules():
     rules = """
 Battleships Game Rules:
-
 1. Game Setup:
     - You and the computer have 5 ships with varying segments.
     - Ships: Carrier (5), Battleship (4), Destroyer (3),
