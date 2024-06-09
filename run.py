@@ -1,6 +1,5 @@
 import os
 import platform
-import sys
 
 # Game board class to be used by the player and computer
 # The size parameter allows the board size to be specificed when creating a new board
@@ -117,7 +116,6 @@ def main():
         print(f"Greetings {player_name}!")
         print("1. Play against the computer")
         print("2. See the rules of battleships")
-        print("3. Restart game")
         choice = input("Please choose an option \n")
         if choice.isdigit():
             choice = int(choice)
@@ -127,8 +125,6 @@ def main():
                 clear_console() 
                 show_rules()
                 input()
-            elif choice == 3:
-                os.execl(sys.executable, sys.executable, *sys.argv)
         else:
             print("Please enter a valid option!")
 
