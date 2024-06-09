@@ -21,11 +21,13 @@ class Board:
                     else: 
                         self.board[i][j] = str(self.size + 1 - i)
 
+    # Takes an origin location, a ship size and an orientation
     # Check if locations are empty and place ship, return False otherwise
-    def place_ship(self, x, y, size, direction):
+    def place_ship(self, x, y, size, orientation):
         positions = []
-        # direction is either "H" for horizontal or "V" for vertical
-        if direction == "H":
+        # orientation is either "H" for horizontal or "V" for vertical
+        if orientation == "H":
+            # Check if ship is size exceeds board size
             if y + size > self.size:
                 return False
             for i in range(size):
@@ -33,7 +35,7 @@ class Board:
                     return False
                 else:
                     positions.append((x, y + i))
-        elif direction == "V":
+        elif orientation == "V":
             if x + size > self.size:
                 return False
             for i in range(size):
