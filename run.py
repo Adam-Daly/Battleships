@@ -1,20 +1,25 @@
 # Game board class to be used by the player and computer
+# The size parameter allows the board size to be specificed when creating a new board
 class Board:
     def __init__(self, size=10):
         self.size = size
         # Fill a list of lists with a symbol to represent blank spaces
-        # self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
+        # Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
         self.board = [[" -" for _ in range(self.size + 1)] for _ in range(self.size + 1)]
         self._initialize_board()
     
-    # Set row 0 and col 0 to chess notation, 
+    # Set row 0 and col 0 to chess notation for the player to identify locations
     def _initialize_board(self):
         for i in range(self.size + 1):
             for j in range (self.size + 1):
+                # Set the top left corner blank for visual clarity
                 if i == 0 and j == 0:
                     self.board[i][j] = "  "
+                # Assign row 0 with letters, starting with the ascii value 64 for "A"
                 elif i == 0 and j > 0:
                     self.board[i][j] = " " + chr(j + 64)
+                # Assign numbers to col 0, descending order
+                # Add a leading space to single digit numbers for visual clarity
                 elif j == 0:
                     if (self.size + 1 - i) <= 9:
                         self.board[i][j] = " " + str(self.size + 1 - i)
