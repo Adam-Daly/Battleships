@@ -128,7 +128,7 @@ def main():
                 show_rules()
                 input()
             elif choice == 3:
-                print("You chose to exit game!")
+                exit()
         else:
             print("Please enter a valid option!")
 
