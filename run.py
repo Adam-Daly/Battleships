@@ -68,29 +68,29 @@ class Board:
 
 def show_rules():
     rules = """
-    Battleships Game Rules:
-    
-    1. Game Setup:
-       - You and the computer each have 5 ships with a different number of segments.
-       - Ships: Carrier (5), Battleship (4), Destroyer (3),
-         Submarine (3), Patrol Boat (2).
-    
-    2. Placing Ships:
-       - Ships placed horizontally or vertically on a 10x10 grid.
-       - No overlapping or extending beyond the grid.
-    
-    3. Taking Turns:
-       - Players call out grid coordinates (e.g., A5, B3).
-       - Hit (X) if a ship is at the coordinate; miss (O) if not.
-    
-    4. Objective:
-       - Sink all of the opponent's ships.
-       - A ship is sunk when all its segments are hit.
-    
-    5. Winning:
-       - First player to sink all opponent's ships wins.
-    
-    Press enter to return to the main menu...
+Battleships Game Rules:
+
+1. Game Setup:
+    - You and the computer have 5 ships with varying segments.
+    - Ships: Carrier (5), Battleship (4), Destroyer (3),
+        Submarine (3), Patrol Boat (2).
+
+2. Placing Ships:
+    - Ships placed horizontally or vertically on a 10x10 grid.
+    - No overlapping or extending beyond the grid.
+
+3. Taking Turns:
+    - Players call out grid coordinates (e.g., A5, B3).
+    - Hit (X) if a ship is at the coordinate; miss (O) if not.
+
+4. Objective:
+    - Sink all of the opponent's ships.
+    - A ship is sunk when all its segments are hit.
+
+5. Winning:
+    - First player to sink all opponent's ships wins.
+
+Press enter to return to the main menu...
     """
     print(rules)
 
