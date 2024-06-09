@@ -2,16 +2,16 @@
 # The size parameter allows the board size to be specificed when creating a new board
 class Board:
     def __init__(self, size=10):
-        self.size = size
+#       Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
+        self.size = size + 1
         # Fill a list of lists with a symbol to represent blank spaces
-        # Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
-        self.board = [[" -" for _ in range(self.size + 1)] for _ in range(self.size + 1)]
+        self.board = [[" -" for _ in range(self.size)] for _ in range(self.size)]
         self._initialize_board()
     
     # Set row 0 and col 0 to chess notation for the player to identify locations
     def _initialize_board(self):
-        for i in range(self.size + 1):
-            for j in range (self.size + 1):
+        for i in range(self.size):
+            for j in range (self.size):
                 # Set the top left corner blank for visual clarity
                 if i == 0 and j == 0:
                     self.board[i][j] = "  "
@@ -21,10 +21,10 @@ class Board:
                 # Assign numbers to col 0, descending order
                 # Add a leading space to single digit numbers for visual clarity
                 elif j == 0:
-                    if (self.size + 1 - i) <= 9:
-                        self.board[i][j] = " " + str(self.size + 1 - i)
+                    if (self.size - i) <= 9:
+                        self.board[i][j] = " " + str(self.size - i)
                     else: 
-                        self.board[i][j] = str(self.size + 1 - i)
+                        self.board[i][j] = str(self.size - i)
 
     # Takes an origin location, a ship size and an orientation ("H" for horizontal, "V" for vertical)
     # Check if locations are empty and place ship, return False otherwise
