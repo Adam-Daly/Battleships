@@ -23,28 +23,27 @@ class Board:
 
     # Takes an origin location, a ship size and an orientation
     # Check if locations are empty and place ship, return False otherwise
-    def place_ship(self, x, y, size, orientation):
+    def place_ship(self, board_row : int, board_col : int, ship_size : int, orientation : str) -> bool:
         positions = []
-        # orientation is either "H" for horizontal or "V" for vertical
         if orientation == "H":
             # Check if ship is size exceeds board size
-            if y + size > self.size:
+            if board_col + ship_size > self.size:
                 return False
-            for i in range(size):
-                if self.board[x][y + i] != " -":
+            for i in range(ship_size):
+                if self.board[board_row][board_col + i] != " -":
                     return False
                 else:
-                    positions.append((x, y + i))
+                    positions.append((board_row, board_col + i))
         elif orientation == "V":
-            if x + size > self.size:
+            if board_row + ship_size > self.size:
                 return False
-            for i in range(size):
-                if self.board[x + i][y] != " -":
+            for i in range(ship_size):
+                if self.board[board_row + i][board_col] != " -":
                     return False
                 else:
-                    positions.append((x + i, y))
-        for (x_pos, y_pos) in positions:
-            self.board[x_pos][y_pos] = " X"
+                    positions.append((board_row + i, board_col))
+        for (row_pos, col_pos) in positions:
+            self.board[row_pos][col_pos] = " X"
 
     def print(self):
         for row in self.board:
