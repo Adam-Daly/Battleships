@@ -118,7 +118,9 @@ def main():
             if choice == 1:
                 print("You chose to play against the computer!")
             elif choice == 2:
+                os.system("cls") 
                 show_rules()
+                input()
             elif choice == 3:
                 print("You chose to exit game!")
         else:
