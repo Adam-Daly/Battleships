@@ -1,4 +1,5 @@
 import os
+import platform
 
 # Game board class to be used by the player and computer
 # The size parameter allows the board size to be specificed when creating a new board
@@ -93,6 +94,12 @@ def show_rules():
     """
     print(rules)
 
+def clear_console():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
 # Entry point for the program
 def main():
 
@@ -105,7 +112,7 @@ def main():
             break
 
     while True:
-        os.system("cls")         
+        clear_console()         
         print()
         print(f"Greetings {player_name}!")
         print("1. Play against the computer")
@@ -117,7 +124,7 @@ def main():
             if choice == 1:
                 print("You chose to play against the computer!")
             elif choice == 2:
-                os.system("cls") 
+                clear_console() 
                 show_rules()
                 input()
             elif choice == 3:
