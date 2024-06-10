@@ -297,18 +297,26 @@ def clear_console():
 		os.system("clear")
 
 def start_game():
-	player_board = Board()
-
+	game = Game()
+	game.opponent_place_ships("random")
 	print("Do you want to automate your ship placement? y / n")
 	automate = input()
+	clear_console()
 	if automate.lower() == "y":
-		player_board.randomize_ships()
-		player_board.print()
-		input()
+		game.player_place_ships("random")
+		game.print(show_tracking_board=True)
 	elif automate.lower() == "n":
-		player_board.manual_placement()
-		player_board.print()
-		input()
+		game.player_place_ships("manual")
+		game.print()
+	while not game.check_winner():
+		print("Your turn to shoot...")
+		game.call_shot()
+		print()
+		print("Your opponent's turn to shoot!")
+		print()
+		game.computer_turn()
+		game.print(show_tracking_board=True)
+		input("Press enter to continue...")
 
 # Entry point for the program
 def main():
