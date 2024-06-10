@@ -138,6 +138,12 @@ class Board:
 					if placement_type == "manual":
 						print("Invalid input. Please enter try again. \n")
 
+	def player_place_ships(self, placement_type):
+		self.place_ships("player", placement_type)
+
+	def opponent_place_ships(self, placement_type):
+		self.place_ships("opponent", placement_type)
+
 	def validate_input(self, user_input, context):
 		board_size = self.size - 1
 		# Make sure input is the expected length
