@@ -40,28 +40,33 @@ class Board:
     # Takes an origin location, a ship size and an orientation ("H" for horizontal, "V" for vertical)
     # Check if locations are empty and place ship, return False otherwise
     # Ships will only ever be placed left to right, or top to bottom
-    def place_ship(self, board_row : int, board_col : int, ship_size : int, orientation : str) -> bool:
+	def place_ship(self, board_row : int, board_col : int, ship_name : str, orientation : str) -> bool:
+		# Get the ship length from matching ship in ships dictionary
+		ship_length = self.ships.get(ship_name)
+		if ship_length is None:
+			return False
+
         positions = []
         if orientation == "H":
             # Check if ship can fit at chosen position
-            if board_col + ship_size > self.size:
+			if board_col + ship_length > self.size:
                 return False
             # Loop through positive direction in horizontal orientation
             # Return False if not a valid position
             # Add position to list if valid
-            for i in range(ship_size):
+			for i in range(ship_length):
                 if self.board[board_row][board_col + i] != " -":
                     return False
                 else:
                     positions.append((board_row, board_col + i))
         elif orientation == "V":
             # Check if ship can fit at chosen position
-            if board_row + ship_size > self.size:
+			if board_row + ship_length > self.size:
                 return False
             # Loop through positive direction in vertical orientation 
             # Return False if not a valid position
             # Add position to list if valid
-            for i in range(ship_size):
+			for i in range(ship_length):
                 if self.board[board_row + i][board_col] != " -":
                     return False
                 else:
