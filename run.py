@@ -149,25 +149,24 @@ def clear_console():
 		os.system("clear")
 
 def start_game():
+	player_board = Board()
+
 	while True:
 		print("Do you want to automate your ship placement? y / n")
 		automate = input()
 		if automate.lower() == "y":
-			print("You choose to automate your ship placement")
+			player_board.randomize_ships()
+			player_board.print()
 			input()
 			break
 		elif automate.lower() == "n":
-			print("You choose to place your ships manually")
+			player_board.manual_placement()
+			player_board.print()
 			input()
 			break
 
 # Entry point for the program
 def main():
-
-	player_board = Board()
-	player_board.randomize_ships()
-	player_board.print()
-
 	print("Welcome to Battleships!")
 	while True:
 		player_name = input("Please enter a name: \n")
