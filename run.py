@@ -143,6 +143,10 @@ def start_game():
 # Entry point for the program
 def main():
 
+	player_board = Board()
+	player_board.randomize_ships()
+	player_board.print()
+
     print("Welcome to Battleships!")
     while True:
         player_name = input("Please enter a name: \n")
