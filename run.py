@@ -1,5 +1,6 @@
 import os
 import platform
+import random
 
 # Game board class to be used by the player and computer
 # The size parameter allows the board size to be specificed when creating a new board
