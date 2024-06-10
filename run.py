@@ -10,13 +10,13 @@ class Board:
         # Fill a list of lists with a symbol to represent blank spaces
         self.board = [[" -" for _ in range(self.size)] for _ in range(self.size)]
         self._initialize_board()
-        self.ships = [
-            ("Carrier", 5),
-            ("Battleship", 4),
-            ("Destroyer", 3),
-            ("Submarine", 3),
-            ("Patrol Boat", 2)
-        ]
+		self.ships = {
+			"Carrier": 5,
+			"Battleship": 4,
+			"Destroyer": 3,
+			"Submarine": 3,
+			"Patrol Boat": 2
+		}
         self.ship_positions = {}
     
     # Set row 0 and col 0 to chess notation for the player to identify locations
