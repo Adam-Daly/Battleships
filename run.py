@@ -4,7 +4,7 @@ import random
 
 # Game board class to be used by the player and computer
 # The size parameter allows the board size to be specificed when creating a new board
-class Board:
+class Game:
 	def __init__(self, size=10):
 		# Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
 		self.size = size + 1
@@ -252,6 +252,26 @@ class Board:
 
 		row, col = random.choice(valid_moves)
 		self.player_board[row][col] = self.check_shot(col, row, "player")
+
+	def check_winner(self):
+		def all_ships_destroyed(ship_positions):
+			for segments in ship_positions.values():
+				if not all(segment["hit"] for segment in segments):
+					return False
+			return True
+
+		player_ships_destroyed = all_ships_destroyed(self.player_ship_positions)
+		opponent_ships_destroyed = all_ships_destroyed(self.opponent_ship_positions)
+
+		if player_ships_destroyed:
+			print("Computer wins! Maybe next time!")
+			return True
+		elif opponent_ships_destroyed:
+			print("Player wins! Good job!")
+			return True
+		else:
+			return False
+
 
 	def print(self, show_tracking_board=False ):
 		if show_tracking_board == False:
