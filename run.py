@@ -27,7 +27,7 @@ class Board:
 				# Set the top left corner blank for visual clarity
 				if i == 0 and j == 0:
 					self.board[i][j] = "  "
-				# Assign row 0 with letters, starting with the ascii value 64 for "A"
+				# Assign row 0 with letters, starting one before the ascii value 65 for "A", as j will be 1
 				elif i == 0 and j > 0:
 					self.board[i][j] = " " + chr(j + 64)
 				# Assign numbers to col 0, descending order
