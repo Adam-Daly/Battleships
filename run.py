@@ -90,8 +90,10 @@ class Board:
 					positions.append((board_row + i, board_col))
 		# If we haven't returned yet, all positions are valid so we place the ship
 		ship_letter = ship_name[0][:1].upper()
-		for (row_pos, col_pos) in positions:
+		for segment, (row_pos, col_pos) in enumerate(positions):
 			self.board[row_pos][col_pos] = " " + ship_letter
+			self.ship_positions[ship_name][segment]["row"] = row_pos
+			self.ship_positions[ship_name][segment]["col"] = col_pos
 		return True
 
 	# Place all ships randomly for computer and optionally for player
@@ -104,7 +106,6 @@ class Board:
 				orientation = random.choice(["V", "H"])
 				success = self.place_ship(row, col, ship, orientation)
 				if success:
-					self.ship_positions[ship] = (row, col, orientation)
 					placed = True
 
 	# Place ships manually with user input
@@ -123,7 +124,6 @@ class Board:
 				if row is not None:
 					success = self.place_ship(row, col, ship, orientation)
 					if success:
-						self.ship_positions[ship] = (row, col, orientation)
 						placed = True
 					else: 
 						print("Failed to place ship. Please pick a spot that can fit the ship. \n")
