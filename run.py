@@ -8,9 +8,11 @@ class Board:
 	def __init__(self, size=10):
 	# Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
 		self.size = size + 1
-		# Fill a list of lists with a symbol to represent blank spaces
-		self.board = [[" -" for _ in range(self.size)] for _ in range(self.size)]
-		self._initialize_board()
+		# Default symbol representing a blank space
+		self.space_dash = " -"
+		# Initialize the default board
+		self.board = self._initialize_board(self.space_dash)
+		# Dictionary of possible ships
 		self.ships = {
 			"Carrier": 5,
 			"Battleship": 4,
@@ -21,23 +23,24 @@ class Board:
 		self.ship_positions = {}
 
 	# Set row 0 and col 0 to chess notation for the player to identify locations
-	def _initialize_board(self):
+	def _initialize_board(self, empty_symbol):
+		board = [[(empty_symbol) for _ in range(self.size)] for _ in range(self.size)]
 		for i in range(self.size):
 			for j in range (self.size):
 				# Set the top left corner blank for visual clarity
 				if i == 0 and j == 0:
-					self.board[i][j] = "  "
+					board[i][j] = "  "
 				# Assign row 0 with letters, starting one before the ascii value 65 for "A", as j will be 1
 				elif i == 0 and j > 0:
-					self.board[i][j] = " " + chr(j + 64)
+					board[i][j] = " " + chr(j + 64)
 				# Assign numbers to col 0, descending order
 				# Add a leading space to single digit numbers for visual clarity
 				elif j == 0:
 					if (self.size - i) <= 9:
-						self.board[i][j] = " " + str(self.size - i)
+						board[i][j] = " " + str(self.size - i)
 					else:
-						self.board[i][j] = str(self.size - i)
-
+						board[i][j] = str(self.size - i)
+		return board
 	# Takes an origin location, a ship name and an orientation ("H" for horizontal, "V" for vertical)
 	# Check if locations are empty and place ship, return False otherwise
 	# Ships will only ever be placed left to right, or top to bottom
@@ -62,7 +65,7 @@ class Board:
 			# Return False if not a valid position
 			# Add position to list if valid
 			for i in range(ship_length):
-				if self.board[board_row][board_col + i] != " -":
+				if self.board[board_row][board_col + i] != self.space_dash:
 					return False
 				else:
 					positions.append((board_row, board_col + i))
@@ -74,7 +77,7 @@ class Board:
 			# Return False if not a valid position
 			# Add position to list if valid
 			for i in range(ship_length):
-				if self.board[board_row + i][board_col] != " -":
+				if self.board[board_row + i][board_col] != self.space_dash:
 					return False
 				else:
 					positions.append((board_row + i, board_col))
