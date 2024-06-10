@@ -118,7 +118,7 @@ class Board:
 				self.print()
 				print(f"Pick a spot for {ship} ({self.ships[ship]} spaces) and an orientation, e.g., A1H")
 				ship_input = input()
-				row, col, orientation = self.validate_input(ship_input)
+				row, col, orientation = self.validate_input(ship_input, "placement")
 				print(row, col, orientation)
 				# If any are None, all are None
 				if row is not None:
