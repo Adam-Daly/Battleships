@@ -48,10 +48,11 @@ class Board:
 					else:
 						board[i][j] = str(self.size - i)
 		return board
+
 	# Takes an origin location, a ship name and an orientation ("H" for horizontal, "V" for vertical)
-	# Check if locations are empty and place ship, return False otherwise
+	# Check if location is valid to place ship, return False otherwise
 	# Ships will only ever be placed left to right, or top to bottom
-	def place_ship(self, board_row : int, board_col : int, ship_name : str, orientation : str) -> bool:
+	def validate_ship_position(self, board_row : int, board_col : int, ship_name : str, orientation : str) -> bool:
 		# Check if the row and col values are on the board
 		if not (board_row in range(0, self.size) and board_col in range(0, self.size)):
 			return False
@@ -64,6 +65,7 @@ class Board:
 			return False
 		# List for storing positions until they are found valid
 		positions = []
+		board = self._initialize_board(self.space_dash)
 		if orientation == "H":
 			# Check if ship can fit at chosen position
 			if board_col + ship_length > self.size:
@@ -72,7 +74,7 @@ class Board:
 			# Return False if not a valid position
 			# Add position to list if valid
 			for i in range(ship_length):
-				if self.board[board_row][board_col + i] != self.space_dash:
+				if board[board_row][board_col + i] != self.space_dash:
 					return False
 				else:
 					positions.append((board_row, board_col + i))
@@ -84,17 +86,12 @@ class Board:
 			# Return False if not a valid position
 			# Add position to list if valid
 			for i in range(ship_length):
-				if self.board[board_row + i][board_col] != self.space_dash:
+				if board[board_row + i][board_col] != self.space_dash:
 					return False
 				else:
 					positions.append((board_row + i, board_col))
-		# If we haven't returned yet, all positions are valid so we place the ship
-		ship_letter = ship_name[0][:1].upper()
-		for segment, (row_pos, col_pos) in enumerate(positions):
-			self.board[row_pos][col_pos] = " " + ship_letter
-			self.ship_positions[ship_name][segment]["row"] = row_pos
-			self.ship_positions[ship_name][segment]["col"] = col_pos
-		return True
+		# If we haven't returned yet, all positions are valid to return
+		return positions
 
 	# Place all ships randomly for computer and optionally for player
 	def place_ships(self, agent, placement_type):
