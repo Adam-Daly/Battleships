@@ -185,19 +185,16 @@ def clear_console():
 def start_game():
 	player_board = Board()
 
-	while True:
 		print("Do you want to automate your ship placement? y / n")
 		automate = input()
 		if automate.lower() == "y":
 			player_board.randomize_ships()
 			player_board.print()
 			input()
-			break
 		elif automate.lower() == "n":
 			player_board.manual_placement()
 			player_board.print()
 			input()
-			break
 
 # Entry point for the program
 def main():
