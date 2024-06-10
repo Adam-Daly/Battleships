@@ -130,30 +130,42 @@ class Board:
 				else:
 					print("Invalid input. Please enter try again. \n")
 
-	def validate_input(self, user_input):
+	def validate_input(self, user_input, context):
 		board_size = self.size - 1
 		# Make sure input is the expected length
-		if len(user_input) not in {3, 4}:
-			return None, None, None
+		if context == "placement":
+			if len(user_input) not in {3, 4}:
+				return None, None, None
+		elif context == "call_shot":
+			if len(user_input) != 2:
+				return None, None, None
 		# Separate first, last and middle characters into separate variables
 		letter = user_input[0]
-		orientation = user_input[-1]
-		number = user_input[1:-1]
+		if context == "placement":
+			number = user_input[1:-1]
+			orientation = user_input[-1]
+		elif context == "call_shot":
+			number = user_input[1]
+
 		# Validate letter
 		if not (letter.isalpha() and "A" <= letter <= chr(ord("A") + board_size - 1)):
 			return None, None, None
 		# Validate number
 		if not (number.isdigit() and 1 <= int(number) <= board_size):
 			return None, None, None
-		# Validate orientation
-		if orientation.upper() not in ("H", "V"):
-			return None, None, None
+		if context == "placement":
+			# Validate orientation
+			if orientation.upper() not in ("H", "V"):
+				return None, None, None
 		# Convert string number to int and modify number so it matches list coordinates
 		row =  board_size - int(number) + 1
 		# Convert letter to int
 		col = ord(letter) - ord("A") + 1
-
-		return row, col, orientation	
+		if context == "placement":
+			return row, col, orientation
+		elif context == "call_shot":	
+			return row, col
+	
 
 	def print(self):
 		print("Your Board:" + "                         " + "Your Opponent's Board")
