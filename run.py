@@ -99,6 +99,19 @@ def clear_console():
     else:
         os.system("clear")
 
+def start_game():
+    while True:
+        print("Do you want to automate your ship placement? y / n")
+        automate = input()
+        if automate.lower() == "y":
+            print("You choose to automate your ship placement")
+            input()
+            break
+        elif automate.lower() == "n":
+            print("You choose to place your ships manually")
+            input()
+            break
+
 # Entry point for the program
 def main():
 
@@ -120,7 +133,7 @@ def main():
         if choice.isdigit():
             choice = int(choice)
             if choice == 1:
-                print("You chose to play against the computer!")
+                start_game()
             elif choice == 2:
                 clear_console() 
                 show_rules()
