@@ -73,7 +73,10 @@ class Board:
                 else:
                     positions.append((board_row + i, board_col))
         # If we haven't returned yet, all positions are valid so we place the ship
+		ship_letter = ship_name[0][:1].upper()
         for (row_pos, col_pos) in positions:
+			self.board[row_pos][col_pos] = " " + ship_letter
+		return True
 
 	def randomize_ships(self):
 		for ship in self.ships:
