@@ -21,6 +21,7 @@ class Board:
 			"Patrol Boat": 2
 		}
 		self.ship_positions = {}
+		self.opp_tracking_board = self._initialize_board(self.space_dash)
 
 	# Set row 0 and col 0 to chess notation for the player to identify locations
 	def _initialize_board(self, empty_symbol):
@@ -149,8 +150,9 @@ class Board:
 		return row, col, orientation	
 
 	def print(self):
-		for row in self.board:
-			print(" ".join(row))
+		print("Your Board:" + "                         " + "Your Opponent's Board")
+		for row1, row2 in zip(self.board, self.opp_tracking_board):
+			print(" ".join(row1) + "    " + " ".join(row2))
 
 def show_rules():
 	rules = """
