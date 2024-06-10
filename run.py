@@ -6,7 +6,7 @@ import random
 # The size parameter allows the board size to be specificed when creating a new board
 class Board:
 	def __init__(self, size=10):
-	# Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
+		# Self.size + 1 is used to accomodate an extra row and col for chessboard notation "A1" etc
 		self.size = size + 1
 		# Default symbol representing a blank space
 		self.space_dash = " -"
@@ -190,16 +190,16 @@ def clear_console():
 def start_game():
 	player_board = Board()
 
-		print("Do you want to automate your ship placement? y / n")
-		automate = input()
-		if automate.lower() == "y":
-			player_board.randomize_ships()
-			player_board.print()
-			input()
-		elif automate.lower() == "n":
-			player_board.manual_placement()
-			player_board.print()
-			input()
+	print("Do you want to automate your ship placement? y / n")
+	automate = input()
+	if automate.lower() == "y":
+		player_board.randomize_ships()
+		player_board.print()
+		input()
+	elif automate.lower() == "n":
+		player_board.manual_placement()
+		player_board.print()
+		input()
 
 # Entry point for the program
 def main():
