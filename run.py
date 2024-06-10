@@ -38,7 +38,7 @@ class Board:
 					else:
 						self.board[i][j] = str(self.size - i)
 
-	# Takes an origin location, a ship size and an orientation ("H" for horizontal, "V" for vertical)
+	# Takes an origin location, a ship name and an orientation ("H" for horizontal, "V" for vertical)
 	# Check if locations are empty and place ship, return False otherwise
 	# Ships will only ever be placed left to right, or top to bottom
 	def place_ship(self, board_row : int, board_col : int, ship_name : str, orientation : str) -> bool:
