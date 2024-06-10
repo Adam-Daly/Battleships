@@ -97,38 +97,47 @@ class Board:
 		return True
 
 	# Place all ships randomly for computer and optionally for player
-	def randomize_ships(self):
-		for ship in self.ships:
-			placed = False
-			while not placed:
-				row = random.randint(1, self.size - 1)
-				col = random.randint(1, self.size - 1)
-				orientation = random.choice(["V", "H"])
-				success = self.place_ship(row, col, ship, orientation)
-				if success:
-					placed = True
+	def place_ships(self, agent, placement_type):
 
-	# Place ships manually with user input
-	def manual_placement(self):
-		print("Ships will be placed left to right or top to bottom")
-		print("Ships can be in horizontal (H) or vertical (V) orientation")
+		if agent == "player":
+			self.player_board = self._initialize_board(self.space_dash)
+			self.player_ship_positions = self.initialize_ships()
+			board, ship_positions = self.player_board, self.player_ship_positions
+		elif agent == "opponent":
+			self.opponent_board = self._initialize_board(self.space_dash)
+			self.opponent_ship_positions = self.initialize_ships()
+			board, ship_positions = self.opponent_board, self.opponent_ship_positions
+
 		for ship in self.ships:
 			placed = False
 			while not placed:
-				self.print()
-				print(f"Pick a spot for {ship} ({self.ships[ship]} spaces) and an orientation, e.g., A1H")
-				ship_input = input()
-				row, col, orientation = self.validate_input(ship_input, "placement")
-				print(row, col, orientation)
+				if placement_type == "random":
+					row = random.randint(1, self.size - 1)
+					col = random.randint(1, self.size - 1)
+					orientation = random.choice(["V", "H"])
+				elif placement_type == "manual":
+					self.print()
+					print(f"Pick an spot for {ship} ({self.ships[ship]} spaces) and an orientation, e.g., A1H")
+					print("'H' for horizontal, left to right. 'V' for vertical, top to bottom.")
+					ship_input = input()
+					row, col, orientation = self.validate_input(ship_input, "placement")
 				# If any are None, all are None
 				if row is not None:
-					success = self.place_ship(row, col, ship, orientation)
-					if success:
+					checked_positions = self.validate_ship_position(row, col, ship, orientation)
+					# Check that checked_position isn't False and doesn't overlap with previous ships
+					if checked_positions and all(board[x][y] == ' -' for x, y in checked_positions):
+						ship_letter = ship[0][:1].upper()
+						for segment, (row_pos, col_pos) in enumerate(checked_positions):
+							board[row_pos][col_pos] = " " + ship_letter
+							ship_positions[ship][segment]["row"] = row_pos
+							ship_positions[ship][segment]["col"] = col_pos
 						placed = True
-					else: 
-						print("Failed to place ship. Please pick a spot that can fit the ship. \n")
+					else:
+						if placement_type == "manual":
+							print("Failed to place ship. Please pick a spot that can fit the ship. \n")
 				else:
-					print("Invalid input. Please enter try again. \n")
+					if placement_type == "manual":
+						print("Invalid input. Please enter try again. \n")
 
 	def validate_input(self, user_input, context):
 		board_size = self.size - 1
