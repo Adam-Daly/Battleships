@@ -329,13 +329,21 @@ def start_game():
 		game.player_place_ships("manual")
 		game.print()
 	while not game.check_winner():
-		print("Your turn to shoot...")
-		game.call_shot()
+		print("Your turn to shoot!")
 		print()
+		game.call_shot()
+		input("Press enter to continue...")
+		clear_console()
+		game.print(show_tracking_board=True)
+		print("Marking board...")
+		input("Press enter to continue...")
 		print("Your opponent's turn to shoot!")
 		print()
 		game.computer_turn()
+		input("Press enter to continue...")
+		clear_console()
 		game.print(show_tracking_board=True)
+		print("Marking board...")
 		input("Press enter to continue...")
 
 # Entry point for the program
