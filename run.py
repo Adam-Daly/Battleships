@@ -11,7 +11,7 @@ class Game:
 		# Default symbol representing a blank space
 		self.space_dash = " -"
 		# Initialize the default board
-		self.player_board = self._initialize_board(self.space_dash)
+		self.player_board = self.initialize_board(self.space_dash)
 		# Dictionary of possible ships
 		self.ships = {
 			"Carrier": 5,
@@ -21,8 +21,8 @@ class Game:
 			"Patrol Boat": 2
 		}
 		self.player_ship_positions = self.initialize_ships()
-		self.shot_tracking_board = self._initialize_board(self.space_dash)
-		self.opponent_board = self._initialize_board(self.space_dash)
+		self.shot_tracking_board = self.initialize_board(self.space_dash)
+		self.opponent_board = self.initialize_board(self.space_dash)
 		self.opponent_ship_positions = self.initialize_ships()
 
 	def initialize_ships(self):
@@ -33,7 +33,7 @@ class Game:
 
 	# Set row 0 and col 0 to chess notation for the player to identify locations
 	# Set empty space using empty_symbol parameter, such as " -"
-	def _initialize_board(self, empty_symbol):
+	def initialize_board(self, empty_symbol):
 		board = [[(empty_symbol) for _ in range(self.size)] for _ in range(self.size)]
 		for i in range(self.size):
 			for j in range (self.size):
@@ -68,7 +68,7 @@ class Game:
 			return False
 		# List for storing positions until they are found valid
 		positions = []
-		board = self._initialize_board(self.space_dash)
+		board = self.initialize_board(self.space_dash)
 		if orientation == "H":
 			# Check if ship can fit at chosen position
 			if board_col + ship_length > self.size:
@@ -100,11 +100,11 @@ class Game:
 	def place_ships(self, agent, placement_type):
 
 		if agent == "player":
-			self.player_board = self._initialize_board(self.space_dash)
+			self.player_board = self.initialize_board(self.space_dash)
 			self.player_ship_positions = self.initialize_ships()
 			board, ship_positions = self.player_board, self.player_ship_positions
 		elif agent == "opponent":
-			self.opponent_board = self._initialize_board(self.space_dash)
+			self.opponent_board = self.initialize_board(self.space_dash)
 			self.opponent_ship_positions = self.initialize_ships()
 			board, ship_positions = self.opponent_board, self.opponent_ship_positions
 
