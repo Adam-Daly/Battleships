@@ -186,6 +186,26 @@ class Board:
 		elif context == "call_shot":	
 			return row, col
 	
+	def check_shot(self, row, col, target_agent):
+		if target_agent == "player":
+			ship_positions = self.player_ship_positions
+		elif target_agent == "opponent":
+			ship_positions = self.opponent_ship_positions
+		for ship_name, segments in ship_positions.items():
+			for segment in segments:
+				if segment["row"] == row and segment["col"] == col:
+					if segment["hit"]:
+						print("This part of the ship was already hit!")
+					else:
+						segment["hit"] = True
+						print("Direct hit!")
+						# Check if all segments of this ship are hit
+						if all(s["hit"] for s in segments):
+							print(f"The {ship_name} is destroyed!")
+						return " X"
+		print("Plop! Hit the water!")
+		return " O"
+
 	def call_shot(self):
 	def print(self, show_tracking_board=False ):
 		if show_tracking_board == False:
