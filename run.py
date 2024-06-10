@@ -52,7 +52,7 @@ class Board:
 		ship_length = self.ships.get(ship_name)
 		if ship_length is None:
 			return False
-
+		# List for storing positions until they are found valid
 		positions = []
 		if orientation == "H":
 			# Check if ship can fit at chosen position
@@ -84,6 +84,7 @@ class Board:
 			self.board[row_pos][col_pos] = " " + ship_letter
 		return True
 
+	# Place all ships randomly for computer and optionally for player
 	def randomize_ships(self):
 		for ship in self.ships:
 			placed = False
@@ -96,6 +97,7 @@ class Board:
 					self.ship_positions[ship] = (row, col, orientation)
 					placed = True
 
+	# Place ships manually with user input
 	def manual_placement(self):
 		print("Ships will be placed left to right or top to bottom")
 		print("Ships can be in horizontal (H) or vertical (V) orientation")
@@ -107,6 +109,7 @@ class Board:
 				ship_input = input()
 				row, col, orientation = self.validate_input(ship_input)
 				print(row, col, orientation)
+				# If any are None, all are None
 				if row is not None:
 					success = self.place_ship(row, col, ship, orientation)
 					if success:
