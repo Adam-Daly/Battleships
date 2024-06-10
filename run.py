@@ -68,7 +68,18 @@ class Board:
                     positions.append((board_row + i, board_col))
         # If we haven't returned yet, all positions are valid so we place the ship
         for (row_pos, col_pos) in positions:
-            self.board[row_pos][col_pos] = " X" 
+
+	def randomize_ships(self):
+		for ship in self.ships:
+			placed = False
+			while not placed:
+				row = random.randint(1, self.size - 1)
+				col = random.randint(1, self.size - 1)
+				orientation = random.choice(["V", "H"])
+				success = self.place_ship(row, col, ship, orientation)
+				if success:
+					self.ship_positions[ship] = (row, col, orientation)
+					placed = True
 
     def print(self):
         for row in self.board:
