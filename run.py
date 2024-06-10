@@ -215,6 +215,44 @@ class Board:
 		self.shot_tracking_board[row][col] = self.check_shot(row, col, "opponent")
 
 	def computer_turn(self):
+		ship_positions = self.player_ship_positions
+
+		# Find existing hits
+		hit_positions = []
+		for segments in ship_positions.values():
+			for segment in segments:
+				if segment["hit"]:
+					hit_positions.append((segment["row"], segment["col"]))
+
+		possible_moves = []
+		if hit_positions:
+			# Choose a random position near an existing hit
+			# First, get random existing hit
+			current_row, current_col = random.choice(hit_positions)
+			# Loop through possible moves around the hit position
+			for row_offset in [-1, 1, 0, 0]:
+				for col_offset in [-1, 1, 0, 0]:
+					new_row = current_row + row_offset
+					new_col = current_col + col_offset
+					if 0 <= new_row < self.size and 0 <= new_col < self.size:
+						possible_moves.append((new_row, new_col))
+		else:
+			# Generate all possible positions if no hits
+			possible_moves = [(row, col) for row in range(self.size) for col in range(self.size)]
+
+		# Filter out positions that already have "O"
+		valid_moves = [(row, col) for row, col in possible_moves if self.player_board[row][col] != "O"]
+
+		# If no valid moves near hits, choose any random valid move
+		if not valid_moves:
+			for row in range(self.size):
+				for col in range(self.size):
+					if self.player_board[row][col] != "O":
+						valid_moves.append((row, col))
+
+		row, col = random.choice(valid_moves)
+		self.player_board[row][col] = self.check_shot(col, row, "player")
+
 	def print(self, show_tracking_board=False ):
 		if show_tracking_board == False:
 			print("Your Board:")
