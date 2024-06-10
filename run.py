@@ -42,6 +42,12 @@ class Board:
 	# Check if locations are empty and place ship, return False otherwise
 	# Ships will only ever be placed left to right, or top to bottom
 	def place_ship(self, board_row : int, board_col : int, ship_name : str, orientation : str) -> bool:
+		# Check if the row and col values are on the board
+		if not (board_row in range(0, self.size) and board_col in range(0, self.size)):
+			return False
+		# Check if the orientation is valid
+		if orientation not in {"H", "V"}:
+			return False
 		# Get the ship length from matching ship in ships dictionary
 		ship_length = self.ships.get(ship_name)
 		if ship_length is None:
