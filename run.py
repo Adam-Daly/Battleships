@@ -166,6 +166,10 @@ class Board:
 		elif context == "call_shot":	
 			return row, col
 	
+	def call_shot(self):
+		print("Enter a location to hit your opponent's board. E.g, E5")
+		call_shot = input()
+		row, col = self.validate_input(call_shot, "placement")
 
 	def print(self):
 		print("Your Board:" + "                         " + "Your Opponent's Board")
