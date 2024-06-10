@@ -32,6 +32,7 @@ class Game:
 		}
 
 	# Set row 0 and col 0 to chess notation for the player to identify locations
+	# Set empty space using empty_symbol parameter, such as " -"
 	def _initialize_board(self, empty_symbol):
 		board = [[(empty_symbol) for _ in range(self.size)] for _ in range(self.size)]
 		for i in range(self.size):
@@ -54,7 +55,7 @@ class Game:
 	# Takes an origin location, a ship name and an orientation ("H" for horizontal, "V" for vertical)
 	# Check if location is valid to place ship, return False otherwise
 	# Ships will only ever be placed left to right, or top to bottom
-	def validate_ship_position(self, board_row : int, board_col : int, ship_name : str, orientation : str) -> bool:
+	def validate_ship_position(self, board_row, board_col, ship_name, orientation):
 		# Check if the row and col values are on the board
 		if not (board_row in range(0, self.size) and board_col in range(0, self.size)):
 			return False
