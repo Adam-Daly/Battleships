@@ -207,6 +207,14 @@ class Board:
 		return " O"
 
 	def call_shot(self):
+		row = None
+		while row is None:
+			print("Enter a location to try to hit your opponent's ships! E.g, E5")
+			location = input()
+			row, col = self.validate_input(location, "call_shot")
+		self.shot_tracking_board[row][col] = self.check_shot(row, col, "opponent")
+
+	def computer_turn(self):
 	def print(self, show_tracking_board=False ):
 		if show_tracking_board == False:
 			print("Your Board:")
