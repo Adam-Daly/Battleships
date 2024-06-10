@@ -187,14 +187,15 @@ class Board:
 			return row, col
 	
 	def call_shot(self):
-		print("Enter a location to hit your opponent's board. E.g, E5")
-		call_shot = input()
-		row, col = self.validate_input(call_shot, "placement")
-
-	def print(self):
-		print("Your Board:" + "                         " + "Your Opponent's Board")
-		for row1, row2 in zip(self.board, self.opp_tracking_board):
-			print(" ".join(row1) + "    " + " ".join(row2))
+	def print(self, show_tracking_board=False ):
+		if show_tracking_board == False:
+			print("Your Board:")
+			for row in self.player_board:
+				print(" ".join(row))
+		else:
+			print("Your Board:" + "                         " + "Your Opponent's Board")
+			for row1, row2 in zip(self.player_board, self.shot_tracking_board):
+				print(" ".join(row1) + "    " + " ".join(row2))
 
 def show_rules():
 	rules = """
