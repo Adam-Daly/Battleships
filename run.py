@@ -20,8 +20,14 @@ class Board:
 			"Submarine": 3,
 			"Patrol Boat": 2
 		}
-		self.ship_positions = {}
+		self.ship_positions = self.initialize_ships()
 		self.opp_tracking_board = self._initialize_board(self.space_dash)
+
+	def initialize_ships(self):
+		return {
+			ship_name: [{"row": None, "col": None, "hit": False} for _ in range(length)]
+			for ship_name, length in self.ships.items()
+		}
 
 	# Set row 0 and col 0 to chess notation for the player to identify locations
 	def _initialize_board(self, empty_symbol):
