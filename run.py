@@ -90,6 +90,27 @@ class Board:
 					self.ship_positions[ship] = (row, col, orientation)
 					placed = True
 
+	def manual_placement(self):
+		print("Ships will be placed left to right or top to bottom")
+		print("Ships can be in horizontal (H) or vertical (V) orientation")
+		for ship in self.ships:
+			placed = False
+			while not placed:
+				self.print()
+				print(f"Pick a spot for {ship} ({self.ships[ship]} spaces) and an orientation, e.g., A1H")
+				ship_input = input()
+				row, col, orientation = self.validate_input(ship_input)
+				print(row, col, orientation)
+				if row is not None:
+					success = self.place_ship(row, col, ship, orientation)
+					if success:
+						self.ship_positions[ship] = (row, col, orientation)
+						placed = True
+					else: 
+						print("Failed to place ship. Please pick a spot that can fit the ship. \n")
+				else:
+					print("Invalid input. Please enter try again. \n")
+
 	def print(self):
 		for row in self.board:
 			print(" ".join(row))
