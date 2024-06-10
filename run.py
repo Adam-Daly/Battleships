@@ -11,7 +11,7 @@ class Board:
 		# Default symbol representing a blank space
 		self.space_dash = " -"
 		# Initialize the default board
-		self.board = self._initialize_board(self.space_dash)
+		self.player_board = self._initialize_board(self.space_dash)
 		# Dictionary of possible ships
 		self.ships = {
 			"Carrier": 5,
@@ -20,8 +20,10 @@ class Board:
 			"Submarine": 3,
 			"Patrol Boat": 2
 		}
-		self.ship_positions = self.initialize_ships()
-		self.opp_tracking_board = self._initialize_board(self.space_dash)
+		self.player_ship_positions = self.initialize_ships()
+		self.shot_tracking_board = self._initialize_board(self.space_dash)
+		self.opponent_board = self._initialize_board(self.space_dash)
+		self.opponent_ship_positions = self.initialize_ships()
 
 	def initialize_ships(self):
 		return {
