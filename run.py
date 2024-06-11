@@ -34,7 +34,7 @@ class Game:
 			ship_name: [{"row": None, "col": None, "hit": False} for _ in range(length)]
 			for ship_name, length in self.ships.items()
 		}
-	
+
 	# Set row 0 and col 0 to chess notation for the player to identify locations
 	# Set empty space using empty_symbol parameter, such as " -"
 	def initialize_board(self, empty_symbol):
@@ -190,9 +190,9 @@ class Game:
 		col = ord(letter) - ord("A") + 1
 		if context == "placement":
 			return row, col, orientation
-		elif context == "call_shot":	
+		elif context == "call_shot":
 			return row, col
-	
+
 	# Get ship positions based on agent, then check check if they are hit or not, or even destroyed
 	def check_shot(self, row, col, target_agent):
 		if target_agent == "player":
@@ -213,7 +213,7 @@ class Game:
 						return " X"
 		print("Plop! Hit the water!")
 		return " O"
-	
+
 	# Players method to take turns shooting at the opp board
 	def call_shot(self):
 		row = None
