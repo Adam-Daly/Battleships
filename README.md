@@ -68,39 +68,39 @@ Follow these steps to deploy your web service on Render.
 
 2. **Create a new web service**
    
-   ![Create a new web service](./assets/images/deploy_1.png)
+   ![Create a new web service](./assets/images/deploy_2.png)
 
 3. **Click "Build and Deploy from a GitHub repository"**
    
-   ![Click "Build and Deploy from a GitHub repository"](./assets/images/deploy_1.png)
+   ![Click "Build and Deploy from a GitHub repository"](./assets/images/deploy_3.png)
 
 4. **Connect your repository, adding permissions if required**
    
-   ![Connect your repository, adding permissions if required](./assets/images/deploy_1.png)
+   ![Connect your repository, adding permissions if required](./assets/images/deploy_4.png)
 
 5. **Choose your project name, region, and branch**
    
-   ![Choose your project name, region, and branch](/assets/images/deploy_1.png)
+   ![Choose your project name, region, and branch](/assets/images/deploy_5.png)
 
 6. **Add build command "yarn"**
    
-   ![Add build command "yarn"](/assets/images/deploy_1.png)
+   ![Add build command "yarn"](/assets/images/deploy_6.png)
 
 7. **Add start command "node index.js"**
    
-   ![Add start command "node index.js"](/assets/images/deploy_1.png)
+   ![Add start command "node index.js"](/assets/images/deploy_7.png)
 
 8. **Select your instance type, "Free" in this case**
    
-   ![Select your instance type, "Free" in this case](/assets/images/deploy_1.png)
+   ![Select your instance type, "Free" in this case](/assets/images/deploy_8.png)
 
 9. **Add environment variable "PORT" with value "8000"**
    
-   ![Add environment variable "PORT" with value "8000"](/assets/images/deploy_1.png)
+   ![Add environment variable "PORT" with value "8000"](/assets/images/deploy_9.png)
 
 10. **Click "Create Web Service"**
     
-    ![Click "Create Web Service"](/assets/images/deploy_1.png)
+    ![Click "Create Web Service"](/assets/images/deploy_10.png)
 
 
 # **User Story Testing**
@@ -134,6 +134,11 @@ Follow these steps to deploy your web service on Render.
 | Observe real-time feedback for hits and misses                                          | Take turns shooting and observe the feedback for each shot.                                         | Immediate visual feedback is provided for each shot, showing hits ("X") and misses ("O") on the tracking board.                                                | &check; |
 | Manually place all ships in the correct positions without overlap or out-of-bound errors | Enter valid positions and orientations for all ships, ensuring no overlaps or out-of-bound errors. | All ships are placed correctly on the board, and the game proceeds without any placement errors.                                                              | &check; |
 
+# PEP8
+
+![PEP8"](/assets/images/pep8.png)
+
+No major issues found with PEP8 / pycodestyle.
 
 # **Bugs**
 
