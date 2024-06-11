@@ -40,7 +40,7 @@ class Game:
 	def initialize_board(self, empty_symbol):
 		board = [[(empty_symbol) for _ in range(self.size)] for _ in range(self.size)]
 		for i in range(self.size):
-			for j in range (self.size):
+			for j in range(self.size):
 				# Set the top left corner blank for visual clarity
 				if i == 0 and j == 0:
 					board[i][j] = "  "
@@ -185,7 +185,7 @@ class Game:
 			if orientation not in ("H", "V"):
 				return None, None, None
 		# Convert string number to int and modify number so it matches list coordinates
-		row =  board_size - int(number) + 1
+		row = board_size - int(number) + 1
 		# Convert letter to int
 		col = ord(letter) - ord("A") + 1
 		if context == "placement":
@@ -284,8 +284,8 @@ class Game:
 			return False
 
 	# Print a single or double side by side board
-	def print(self, show_tracking_board=False ):
-		if show_tracking_board == False:
+	def print(self, show_tracking_board=False):
+		if show_tracking_board is False:
 			print("Your Board:")
 			for row in self.player_board:
 				print(" ".join(row))
