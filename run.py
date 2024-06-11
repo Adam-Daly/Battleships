@@ -10,8 +10,6 @@ class Game:
 		self.size = size + 1
 		# Default symbol representing a blank space
 		self.space_dash = " -"
-		# Initialize the default board
-		self.player_board = self.initialize_board(self.space_dash)
 		# Dictionary of possible ships
 		self.ships = {
 			"Carrier": 5,
@@ -20,17 +18,23 @@ class Game:
 			"Submarine": 3,
 			"Patrol Boat": 2
 		}
+		# Initialize the player board
+		self.player_board = self.initialize_board(self.space_dash)
+		# Initialize the player ship positions
 		self.player_ship_positions = self.initialize_ships()
+		# Shot tracking board for showing hits and misses on opponents ships
 		self.shot_tracking_board = self.initialize_board(self.space_dash)
+		# Opponent board and ship positions
 		self.opponent_board = self.initialize_board(self.space_dash)
 		self.opponent_ship_positions = self.initialize_ships()
 
+	# For each ship and segment in that ship, generate a row, col and hit flag
 	def initialize_ships(self):
 		return {
 			ship_name: [{"row": None, "col": None, "hit": False} for _ in range(length)]
 			for ship_name, length in self.ships.items()
 		}
-
+	
 	# Set row 0 and col 0 to chess notation for the player to identify locations
 	# Set empty space using empty_symbol parameter, such as " -"
 	def initialize_board(self, empty_symbol):
@@ -96,9 +100,9 @@ class Game:
 		# If we haven't returned yet, all positions are valid to return
 		return positions
 
-	# Place all ships randomly for computer and optionally for player
+	# Place all ships, "random" or "manually" and for "player" or "opponent". Keep track of them in a list
 	def place_ships(self, agent, placement_type):
-
+		# Get board and ship pos for specific agent
 		if agent == "player":
 			self.player_board = self.initialize_board(self.space_dash)
 			self.player_ship_positions = self.initialize_ships()
@@ -107,7 +111,7 @@ class Game:
 			self.opponent_board = self.initialize_board(self.space_dash)
 			self.opponent_ship_positions = self.initialize_ships()
 			board, ship_positions = self.opponent_board, self.opponent_ship_positions
-
+		# Place random or manual, for each ship
 		for ship in self.ships:
 			placed = False
 			while not placed:
@@ -139,12 +143,14 @@ class Game:
 					if placement_type == "manual":
 						print("Invalid input. Please enter try again. \n")
 
+	# Helper methods to allow for player and opponent using same method, keeping signatures simple
 	def player_place_ships(self, placement_type):
 		self.place_ships("player", placement_type)
 
 	def opponent_place_ships(self, placement_type):
 		self.place_ships("opponent", placement_type)
 
+	# Validate input in the form A1 or A1H, such as with chess notation but with orientation sometimes
 	def validate_input(self, user_input, context):
 		board_size = self.size - 1
 		# Check if the input is empty
@@ -187,6 +193,7 @@ class Game:
 		elif context == "call_shot":	
 			return row, col
 	
+	# Get ship positions based on agent, then check check if they are hit or not, or even destroyed
 	def check_shot(self, row, col, target_agent):
 		if target_agent == "player":
 			ship_positions = self.player_ship_positions
@@ -206,7 +213,8 @@ class Game:
 						return " X"
 		print("Plop! Hit the water!")
 		return " O"
-
+	
+	# Players method to take turns shooting at the opp board
 	def call_shot(self):
 		row = None
 		while row is None:
@@ -215,6 +223,7 @@ class Game:
 			row, col = self.validate_input(location, "call_shot")
 		self.shot_tracking_board[row][col] = self.check_shot(row, col, "opponent")
 
+	# Allows the computer to take turns and guess positions to hit
 	def computer_turn(self):
 		ship_positions = self.player_ship_positions
 
@@ -254,6 +263,7 @@ class Game:
 		row, col = random.choice(valid_moves)
 		self.player_board[row][col] = self.check_shot(col, row, "player")
 
+	# Check if all ships in a list are destroyed and declare a winner if so
 	def check_winner(self):
 		def all_ships_destroyed(ship_positions):
 			for segments in ship_positions.values():
@@ -273,7 +283,7 @@ class Game:
 		else:
 			return False
 
-
+	# Print a single or double side by side board
 	def print(self, show_tracking_board=False ):
 		if show_tracking_board == False:
 			print("Your Board:")
@@ -284,6 +294,7 @@ class Game:
 			for row1, row2 in zip(self.player_board, self.shot_tracking_board):
 				print(" ".join(row1) + "    " + " ".join(row2))
 
+# Rules for battleships
 def show_rules():
 	rules = """
 Battleships Game Rules:
@@ -311,12 +322,14 @@ Press enter to return to the main menu...
 	"""
 	print(rules)
 
+# Clear console depending on system
 def clear_console():
 	if platform.system() == "Windows":
 		os.system("cls")
 	else:
 		os.system("clear")
 
+# Main game loop
 def start_game():
 	game = Game()
 	game.opponent_place_ships("random")
