@@ -54,10 +54,6 @@ The target audience for Battleships includes strategy game enthusiasts, classic 
 2. GitHub
 3. Visual Studio Code
 
-# Languages Used
-
-1. Python
-
 # Deployment Guide
 
 Follow these steps to deploy your web service on Render.
