@@ -58,6 +58,8 @@ The target audience for Battleships includes strategy game enthusiasts, classic 
 
 Follow these steps to deploy your web service on Render.
 
+   ![Sign up for Render](./assets/images/deploy_0.png)
+
 1. **Sign up for Render**
    
    ![Sign up for Render](./assets/images/deploy_1.png)
